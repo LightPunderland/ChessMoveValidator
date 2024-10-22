@@ -1,0 +1,62 @@
+stack run fp2024-two --allow-different-user
+Welcome! Press [TAB] for auto completion.
+>>> Define board as 6x6
+Board defined with size: (6,6)
+
+>>> Define board as 3x3
+PARSE ERROR:Invalid board size: must be one of 4x4, 5x5, 6x6, 7x7, or 8x8
+
+>>> Validate for knight
+Piece defined as: knight
+
+>>> Move tree (A1(B3(C5(D7()))))
+PARSE ERROR:Invalid move tree format: Expected ')'
+
+>>> Move tree (A1(B3(C5(D7)))))
+Move tree defined.
+
+>>> Show state
+Current board size: (6,6)
+Current piece: knight
+Current move tree: MoveTree (Position 'A' 1) [MoveTree (Position 'B' 3) [MoveTree (Position 'C' 5) [MoveTree (Position 'D' 7) []]]]
+
+>>> Run
+ERROR:Invalid moves found at positions: Position 'D' 7
+
+>>> Define board as 8x8
+Board defined with size: (8,8)
+
+>>> Show state
+Current board size: (8,8)
+Current piece: knight
+Current move tree: MoveTree (Position 'A' 1) [MoveTree (Position 'B' 3) [MoveTree (Position 'C' 5) [MoveTree (Position 'D' 7) []]]]
+
+>>> Run
+All moves validated successfully.
+
+>>> Validate for rook
+Piece defined as: rook
+
+>>> Move tree (A1(A8(H8))(H1(H8)))
+Move tree defined.
+
+>>> Run
+All moves validated successfully.
+
+>>> Move tree (A1(B1))
+Move tree defined.
+
+>>> Run
+All moves validated successfully.
+
+>>> Move tree (A1(B2))
+Move tree defined.
+
+>>> Run
+ERROR:Invalid moves found at positions: Position 'B' 2
+
+>>> Validate for bishop
+Piece defined as: bishop
+
+>>> Run
+All moves validated successfully.
