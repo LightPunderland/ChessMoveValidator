@@ -8,6 +8,19 @@ This project implements a command-line tool for exploring valid chess piece move
 2) As per the lecturers' advice, removed the "Define knight position" command, as it was deemed redundant since the starting position can be easily inferred from the given move tree.
 3) Added the show state command, to check the current configuration of your program.
 
+## Additions for Lab3:
+1) Added batch processing: to process multiple commands, simply type :paste in the terminal, type "BEGIN" to signal the start of the batch, then type each of the queries, seperated by semicolons, and, finally, type "END" to signal the end of the batch. Here's an example:
+
+>>> :paste
+-- Entering multi-line mode. Press <Ctrl-D> to finish.
+| BEGIN
+| Define board as 8x8;
+| Validate for bishop;
+| Move tree (E2(F4(E6)(G6))(D4(C6)(B5)));
+| END
+
+2) The program now supports saving and loading states: once you have a state set up (a state consists of a board size, a piece and a move tree), you can now save it to state.txt by typing "save" in the terminal, and revert back to it after changing something by typing "load" in the terminal.
+
 ## Main entities:
 <board_dimensions> - represents the size of the chessboard, which can be configured by the user.
 

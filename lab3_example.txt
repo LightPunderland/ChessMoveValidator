@@ -1,0 +1,39 @@
+--Run the program with - 'stack run fp2024-three --allow-different-user'
+
+--Showing default state
+>>> Show state
+Current board size: (6,6)
+Current piece: knight
+Current move tree: MoveTree (Position 'A' 1) []
+
+--Saving default state
+>>> save
+State saved successfully
+
+--Batch query processing working
+>>> :paste
+-- Entering multi-line mode. Press <Ctrl-D> to finish.
+| BEGIN
+| Define board as 8x8;
+| Validate for bishop;
+| Move tree (E2(F4(E6)(G6))(D4(C6)(B5)));
+| END
+| 
+Board defined with size: (8,8)
+Piece defined as: bishop
+Move tree defined.
+
+>>> Show state
+Current board size: (8,8)
+Current piece: bishop
+Current move tree: MoveTree (Position 'E' 2) [MoveTree (Position 'F' 4) [MoveTree (Position 'E' 6) [],MoveTree (Position 'G' 6) []],MoveTree (Position 'D' 4) [MoveTree (Position 'C' 6) [],MoveTree (Position 'B' 5) []]]
+
+--Loading previous state
+>>> load
+State loaded successfully
+
+--Previous state loads successfully
+>>> Show state
+Current board size: (6,6)
+Current piece: knight
+Current move tree: MoveTree (Position 'A' 1) []

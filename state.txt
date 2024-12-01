@@ -1,0 +1,5 @@
+BEGIN
+Define board as 6x6;
+Validate for knight;
+Move tree (A1);
+END

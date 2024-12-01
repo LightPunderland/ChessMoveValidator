@@ -6,6 +6,7 @@ module Lib2
     ( Query(..),
       parseQuery,
       parseDefineBoard,
+      parseExactWord,
       parseSize,
       parseDefinePiece,
       parsePiece,
@@ -32,8 +33,13 @@ module Lib2
       MoveTree(..),
       Position(..),
       State(..),
+      Parser,
       emptyState,
-      stateTransition
+      stateTransition,
+      parseChar,
+      parseLetters,
+      parseWord,
+      parseNumber,
     ) where
 
 import qualified Data.Char as C
@@ -55,33 +61,33 @@ data Query
     | Run  -- Run validation
     deriving (Eq, Show)
 
-parseQuery :: String -> Either String Query
+parseQuery :: String -> Either String (Query, String)
 parseQuery input
     | null input = Left "Input cannot be empty."
     | otherwise =
         case and3' (\_ _ _ -> ()) (parseExactWord "Define") (parseExactWord "board") (parseExactWord "as") input of
             Right (_, rest) ->
                 case parseDefineBoard rest of
-                    Right (query, _) -> Right query
+                    Right (query, rest') -> Right (query, rest')
                     Left err -> Left err
             _ ->
                 case and2' (\_ _ -> ()) (parseExactWord "Validate") (parseExactWord "for") input of
                     Right (_, rest) ->
                         case parseDefinePiece rest of
-                            Right (query, _) -> Right query
+                            Right (query, rest') -> Right (query, rest')
                             Left err -> Left err
                     _ ->
                         case and2' (\_ _ -> ()) (parseExactWord "Move") (parseExactWord "tree") input of
                             Right (_, rest) ->
                                 case parseMoveTree rest of
-                                    Right (moveTree, _) -> Right (DefineMoveTree moveTree)
+                                    Right (moveTree, rest') -> Right (DefineMoveTree moveTree, rest')
                                     Left err -> Left err
                             _ ->
                                 case and2' (\_ _ -> ()) (parseExactWord "Show") (parseExactWord "state") input of
-                                    Right (_, _) -> Right ShowState
+                                    Right (_, rest) -> Right (ShowState, rest)
                                     _ ->
                                         case parseExactWord "Run" input of
-                                            Right (_, _) -> Right Run
+                                            Right (_, rest) -> Right (Run, rest)
                                             _ -> Left "Invalid input format."
 
 
